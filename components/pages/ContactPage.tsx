@@ -4,6 +4,7 @@ import React, { useState, useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import ReCAPTCHA from 'react-google-recaptcha';
 import { sendEmail, ContactFormData } from '@/lib/emailService';
+import { formatFileSize } from '@/lib/utils';
 
 interface ContactPageProps {
   setCurrentPage: (page: string) => void;
@@ -46,14 +47,6 @@ export default function ContactPage({ setCurrentPage }: ContactPageProps) {
 
   const handleClick = () => {
     fileInputRef.current?.click();
-  };
-
-  const formatFileSize = (bytes: number) => {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024;
-    const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -101,7 +94,9 @@ export default function ContactPage({ setCurrentPage }: ContactPageProps) {
         setSubmitError(result.message);
       }
     } catch (error) {
-      console.error('Erreur:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Erreur formulaire:', error);
+      }
       setSubmitError('Une erreur est survenue. Veuillez réessayer plus tard.');
     } finally {
       setIsSubmitting(false);

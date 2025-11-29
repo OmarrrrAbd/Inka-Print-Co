@@ -1,7 +1,6 @@
 import emailjs from '@emailjs/browser';
+import { fileToBase64, formatFileSize } from './utils';
 
-// Configuration EmailJS
-// À remplacer par vos propres clés après configuration sur emailjs.com
 const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '';
 const EMAILJS_TEMPLATE_ID = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '';
 const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '';
@@ -66,36 +65,13 @@ export const sendEmail = async (
       throw new Error('Erreur lors de l\'envoi de l\'email');
     }
   } catch (error) {
-    console.error('Erreur EmailJS:', error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error('Erreur EmailJS:', error);
+    }
     return {
       success: false,
       message: 'Une erreur est survenue lors de l\'envoi. Veuillez réessayer.',
     };
   }
-};
-
-// Convertir un fichier en base64
-const fileToBase64 = (file: File): Promise<string> => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.readAsDataURL(file);
-    reader.onload = () => {
-      if (typeof reader.result === 'string') {
-        resolve(reader.result);
-      } else {
-        reject(new Error('Erreur lors de la conversion du fichier'));
-      }
-    };
-    reader.onerror = (error) => reject(error);
-  });
-};
-
-// Formater la taille du fichier
-const formatFileSize = (bytes: number): string => {
-  if (bytes === 0) return '0 Bytes';
-  const k = 1024;
-  const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-  const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
 };
 
