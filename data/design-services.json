@@ -1,0 +1,57 @@
+{
+  "designServices": [
+    {
+      "id": 1,
+      "name": "Conception graphique",
+      "description": "Création de designs professionnels adaptés à vos besoins d'impression",
+      "services": [
+        "Logos et identité visuelle",
+        "Mise en page de documents",
+        "Design de cartes d'affaires",
+        "Création de dépliants et brochures",
+        "Design d'affiches et bannières"
+      ],
+      "image": "/images/design/conception-graphique.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Retouche d'images",
+      "description": "Amélioration et optimisation de vos images pour l'impression",
+      "services": [
+        "Retouche photo professionnelle",
+        "Optimisation des couleurs",
+        "Correction de contraste et luminosité",
+        "Suppression d'arrière-plan",
+        "Préparation pour l'impression"
+      ],
+      "image": "/images/design/retouche-images.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Mise en page",
+      "description": "Mise en page professionnelle de vos documents et publications",
+      "services": [
+        "Mise en page de catalogues",
+        "Création de brochures",
+        "Design de dépliants",
+        "Mise en page de magazines",
+        "Création de présentations"
+      ],
+      "image": "/images/design/mise-en-page.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Branding",
+      "description": "Développement complet de votre identité de marque",
+      "services": [
+        "Création de logo",
+        "Charte graphique",
+        "Papeterie d'entreprise",
+        "Design de packaging",
+        "Identité visuelle complète"
+      ],
+      "image": "/images/design/branding.jpg"
+    }
+  ]
+}
+

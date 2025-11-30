@@ -33,8 +33,12 @@ export interface Translations {
     ourServices: string;
     servicesSubtitle: string;
     printing: string;
+    printingDesc: string;
     design: string;
+    designDesc: string;
     consulting: string;
+    consultingDesc: string;
+    seeMore: string;
     seeAllProducts: string;
   };
   products: {
@@ -52,7 +56,15 @@ export interface Translations {
     packagingDesc: string;
     seeProduct: string;
     backToCatalogue: string;
+    productNotFound: string;
+    defaultProductDescription: string;
     requestPersonalizedQuote: string;
+    chooseVariant: string;
+    quantity: string;
+    specifications: string;
+    category: string;
+    variant: string;
+    reference: string;
   };
   catalogue: {
     title: string;
@@ -144,9 +156,9 @@ export const translations: Record<Language, Translations> = {
       requestQuote: 'Demander un devis',
     },
     home: {
-      title: 'Solutions d\'impression',
-      titleLine2: 'rapides et fiables',
-      subtitle: 'Transformez vos idées en réalité avec nos services d\'impression professionnels de haute qualité. Livraison rapide et prix compétitifs garantis.',
+      title: 'Nous réalisons vos impressions',
+      titleLine2: 'du design à la livraison',
+      subtitle: 'Contactez-nous pour obtenir toutes les informations sur nos produits et services adaptés à vos besoins.',
       seeCatalogue: 'Voir le catalogue',
       contactUs: 'Nous contacter',
       ourProducts: 'Nos produits d\'impression',
@@ -166,9 +178,13 @@ export const translations: Record<Language, Translations> = {
       requestFreeQuote: 'Demander un devis gratuit',
       ourServices: 'Nos services',
       servicesSubtitle: 'Une gamme complète de services pour répondre à tous vos besoins',
-      printing: 'Impression – Flyers, cartes, brochures, bannières, packaging',
-      design: 'Design – Création graphique professionnelle adaptée à vos supports',
-      consulting: 'Conseil / suivi – Assistance pour vos choix, formats et finitions',
+      printing: 'Impression',
+      printingDesc: 'Cartes d\'affaires, circulaires, dépliants, affiches et bien plus. Impression numérique et offset de haute qualité.',
+      design: 'Design',
+      designDesc: 'Création graphique professionnelle adaptée à vos supports. Logos, mise en page, retouche d\'images et branding complet.',
+      consulting: 'Conseil / suivi',
+      consultingDesc: 'Assistance pour vos choix, formats et finitions. Notre équipe vous guide dans tous vos projets d\'impression.',
+      seeMore: 'Voir plus',
       seeAllProducts: 'Voir tous les produits',
     },
     products: {
@@ -186,7 +202,15 @@ export const translations: Record<Language, Translations> = {
       packagingDesc: 'Boîtes, sachets, étiquettes sur mesure. Carton recyclable. Impression offset ou numérique. Valorisez votre marque.',
       seeProduct: 'Voir le produit',
       backToCatalogue: 'Retour au catalogue',
+      productNotFound: 'Produit non trouvé',
+      defaultProductDescription: 'Produit de haute qualité pour tous vos besoins d\'impression.',
       requestPersonalizedQuote: 'Demander un devis personnalisé',
+      chooseVariant: 'Choisir un variant :',
+      quantity: 'Quantité :',
+      specifications: 'Spécifications',
+      category: 'Catégorie:',
+      variant: 'Variant:',
+      reference: 'Référence:',
     },
     catalogue: {
       title: 'Notre catalogue',
@@ -196,9 +220,9 @@ export const translations: Record<Language, Translations> = {
       title: 'Nos services d\'impression',
       subtitle: 'Solutions complètes d\'impression professionnelle pour tous vos besoins marketing et communication',
       digitalPrinting: 'Impression numérique',
-      digitalPrintingDesc: 'Idéale pour les petites et moyennes quantités avec un rendu de haute qualité. Délais rapides et flexibilité maximale pour vos projets urgents.',
+      digitalPrintingDesc: 'Parfaite pour vos cartes d\'affaires, circulaires, dépliants et cartes postales. Impression de haute qualité avec finitions matte, brillant ou soft-touch. Quantités de 200 à 1000 exemplaires avec délais rapides.',
       offsetPrinting: 'Impression offset',
-      offsetPrintingDesc: 'Pour les grandes quantités avec une qualité d\'impression exceptionnelle et des coûts optimisés. Parfait pour vos campagnes d\'envergure.',
+      offsetPrintingDesc: 'Idéale pour les grandes quantités d\'affiches, bloc-notes, pochettes corporatives et cartes de voeux. Qualité d\'impression exceptionnelle avec finitions premium. Meilleur rapport qualité-prix pour vos campagnes d\'envergure.',
       largeFormat: 'Grand format',
       largeFormatDesc: 'Supports publicitaires de grande taille pour une visibilité maximale. Intérieur et extérieur, résistants aux intempéries.',
       customPackaging: 'Packaging sur mesure',
@@ -276,9 +300,9 @@ export const translations: Record<Language, Translations> = {
       requestQuote: 'Request a quote',
     },
     home: {
-      title: 'Fast and reliable',
-      titleLine2: 'printing solutions',
-      subtitle: 'Transform your ideas into reality with our high-quality professional printing services. Fast delivery and competitive prices guaranteed.',
+      title: 'We realize your prints',
+      titleLine2: 'from design to delivery',
+      subtitle: 'Contact us to get all the information about our products and services tailored to your needs.',
       seeCatalogue: 'View catalogue',
       contactUs: 'Contact us',
       ourProducts: 'Our printing products',
@@ -298,9 +322,13 @@ export const translations: Record<Language, Translations> = {
       requestFreeQuote: 'Request a free quote',
       ourServices: 'Our services',
       servicesSubtitle: 'A complete range of services to meet all your needs',
-      printing: 'Printing – Flyers, cards, brochures, banners, packaging',
-      design: 'Design – Professional graphic design adapted to your media',
-      consulting: 'Consulting / follow-up – Assistance for your choices, formats and finishes',
+      printing: 'Printing',
+      printingDesc: 'Business cards, flyers, brochures, posters and more. High-quality digital and offset printing.',
+      design: 'Design',
+      designDesc: 'Professional graphic design adapted to your media. Logos, layout, image retouching and complete branding.',
+      consulting: 'Consulting / follow-up',
+      consultingDesc: 'Assistance for your choices, formats and finishes. Our team guides you through all your printing projects.',
+      seeMore: 'View more',
       seeAllProducts: 'View all products',
     },
     products: {
@@ -318,7 +346,15 @@ export const translations: Record<Language, Translations> = {
       packagingDesc: 'Custom boxes, bags, labels. Recyclable cardboard. Offset or digital printing. Enhance your brand.',
       seeProduct: 'View product',
       backToCatalogue: 'Back to catalogue',
+      productNotFound: 'Product not found',
+      defaultProductDescription: 'High quality product for all your printing needs.',
       requestPersonalizedQuote: 'Request a personalized quote',
+      chooseVariant: 'Choose a variant:',
+      quantity: 'Quantity:',
+      specifications: 'Specifications',
+      category: 'Category:',
+      variant: 'Variant:',
+      reference: 'Reference:',
     },
     catalogue: {
       title: 'Our catalogue',
@@ -328,9 +364,9 @@ export const translations: Record<Language, Translations> = {
       title: 'Our printing services',
       subtitle: 'Complete professional printing solutions for all your marketing and communication needs',
       digitalPrinting: 'Digital printing',
-      digitalPrintingDesc: 'Ideal for small and medium quantities with high-quality output. Fast turnaround and maximum flexibility for your urgent projects.',
+      digitalPrintingDesc: 'Perfect for your business cards, flyers, brochures and postcards. High-quality printing with matte, glossy or soft-touch finishes. Quantities from 200 to 1000 copies with fast turnaround.',
       offsetPrinting: 'Offset printing',
-      offsetPrintingDesc: 'For large quantities with exceptional print quality and optimized costs. Perfect for your large-scale campaigns.',
+      offsetPrintingDesc: 'Ideal for large quantities of posters, notepads, corporate folders and greeting cards. Exceptional print quality with premium finishes. Best value for money for your large-scale campaigns.',
       largeFormat: 'Large format',
       largeFormatDesc: 'Large-size advertising supports for maximum visibility. Indoor and outdoor, weather resistant.',
       customPackaging: 'Custom packaging',

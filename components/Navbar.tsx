@@ -24,9 +24,13 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
           <div className="flex items-center">
             <button
               onClick={() => setCurrentPage('home')}
-              className="text-2xl font-bold text-gray-900"
+              className="flex items-center h-10 hover:opacity-80 transition-opacity"
             >
-              Inka Print Co.
+              <img
+                src="/images/logo/logo.svg"
+                alt="Inka Print Co."
+                className="h-full w-auto"
+              />
             </button>
           </div>
 
@@ -82,7 +86,7 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
               {t.nav.contact}
             </button>
             <button
-              onClick={() => setCurrentPage('contact')}
+              onClick={() => setCurrentPage('quote')}
               className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors font-semibold"
             >
               {t.nav.requestQuote}
@@ -168,7 +172,7 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
               </button>
               <button
                 onClick={() => {
-                  setCurrentPage('contact');
+                  setCurrentPage('quote');
                   setMobileMenuOpen(false);
                 }}
                 className="bg-blue-600 text-white px-6 py-3 rounded-lg w-full font-semibold"

@@ -132,7 +132,9 @@ export default function ProductDetailPage({ productId, setCurrentPage }: Product
 
         <div className="grid lg:grid-cols-2 gap-12">
           <div>
-            <img src={product.image} alt={product.title} className="w-full rounded-xl shadow-lg" />
+            <div className="w-full h-96 bg-gray-200 rounded-xl shadow-lg flex items-center justify-center">
+              <i className="fas fa-image text-gray-400 text-6xl"></i>
+            </div>
           </div>
           <div>
             <h1 className="text-4xl font-bold text-gray-900 mb-6">{product.title}</h1>

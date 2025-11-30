@@ -49,6 +49,8 @@ This will create an optimized production build in the `out` directory, ready for
 
 ## Deployment to Netlify
 
+### Quick Start
+
 1. Push your code to a Git repository (GitHub, GitLab, or Bitbucket)
 
 2. In Netlify:
@@ -59,7 +61,22 @@ This will create an optimized production build in the `out` directory, ready for
      - Publish directory: `out`
    - Click "Deploy site"
 
+3. **Configure Environment Variables** (IMPORTANT):
+   - Go to Site settings > Environment variables
+   - Add these variables:
+     - `NEXT_PUBLIC_EMAILJS_SERVICE_ID`
+     - `NEXT_PUBLIC_EMAILJS_TEMPLATE_ID`
+     - `NEXT_PUBLIC_EMAILJS_PUBLIC_KEY`
+     - `NEXT_PUBLIC_RECAPTCHA_SITE_KEY`
+   - Redéployez après avoir ajouté les variables
+
+4. **Configure EmailJS Template**:
+   - Dans EmailJS Dashboard, configurez votre template pour envoyer les emails à **VOTRE adresse email**
+   - Voir [docs/EMAILJS_SETUP.md](./docs/EMAILJS_SETUP.md) pour les détails
+
 The site will automatically deploy on every push to your main branch.
+
+📖 **Guide complet** : Voir [docs/NETLIFY_DEPLOYMENT.md](./docs/NETLIFY_DEPLOYMENT.md) pour un guide détaillé de déploiement.
 
 ## Project Structure
 
@@ -102,18 +119,16 @@ The website supports French and English. Users can switch languages using the la
 
 ## Configuration
 
-### EmailJS et reCAPTCHA
+### Netlify Forms
 
-Le formulaire de contact nécessite une configuration EmailJS et Google reCAPTCHA.
+Le formulaire de contact utilise **Netlify Forms** pour recevoir les notifications. Aucune configuration supplémentaire n'est nécessaire en développement.
 
-1. Créez un fichier `.env.local` à la racine du projet
-2. Copiez les variables depuis `.env.example`
-3. Suivez les instructions dans `docs/EMAILJS_SETUP.md` pour obtenir vos clés
+Pour la production sur Netlify :
+1. Déployez votre site sur Netlify
+2. Allez dans **Forms** > **Settings** dans votre dashboard Netlify
+3. Activez **Email notifications** et entrez votre adresse email
 
-```bash
-cp .env.example .env.local
-# Puis éditez .env.local avec vos clés
-```
+📖 **Guide complet** : Voir [docs/NETLIFY_FORMS_SETUP.md](./docs/NETLIFY_FORMS_SETUP.md) pour tous les détails.
 
 ## Customization
 

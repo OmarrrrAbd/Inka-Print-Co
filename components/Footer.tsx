@@ -15,7 +15,13 @@ export default function Footer({ setCurrentPage }: FooterProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           <div>
-            <h3 className="text-xl font-bold mb-4">Inka Print Co.</h3>
+            <div className="mb-4">
+              <img
+                src="/images/logo/logo.svg"
+                alt="Inka Print Co."
+                className="h-12 w-auto filter brightness-0 invert"
+              />
+            </div>
             <p className="text-gray-400 mb-4">{t.footer.description}</p>
             <div className="flex space-x-3">
               <a

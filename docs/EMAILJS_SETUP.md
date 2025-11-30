@@ -17,7 +17,8 @@
 ### 3. Créer un template d'email
 1. Allez dans **Email Templates**
 2. Cliquez sur **Create New Template**
-3. Utilisez ce template de base :
+3. **IMPORTANT** : Dans le champ **To Email**, entrez **VOTRE adresse email** (celle où vous voulez recevoir les notifications)
+4. Utilisez ce template de base :
 
 ```
 Sujet: Nouvelle demande de devis - {{from_name}}
@@ -37,13 +38,20 @@ Message:
 
 {% if file_name %}
 Fichier joint: {{file_name}} ({{file_size}})
+Le fichier est disponible en pièce jointe (base64).
 {% endif %}
 
 ---
 Cet email a été envoyé depuis le formulaire de contact du site web.
+Date: {{date}}
 ```
 
-4. Notez le **Template ID**
+**⚠️ Important** : 
+- Le champ **To Email** doit contenir **VOTRE email** (ex: contact@inkaprint.ca)
+- C'est à cette adresse que vous recevrez toutes les notifications de formulaire
+- Le champ **From Name** peut être `{{from_name}}` pour afficher le nom du client
+
+5. Notez le **Template ID**
 
 ### 4. Obtenir la clé publique
 1. Allez dans **Account** > **General**

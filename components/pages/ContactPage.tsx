@@ -2,24 +2,25 @@
 
 import React, { useState, useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import ReCAPTCHA from 'react-google-recaptcha';
-import { sendEmail, ContactFormData } from '@/lib/emailService';
 import { formatFileSize } from '@/lib/utils';
+import { getCategories, getCategoryDisplayName } from '@/lib/products';
 
 interface ContactPageProps {
   setCurrentPage: (page: string) => void;
 }
 
 export default function ContactPage({ setCurrentPage }: ContactPageProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
   const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const recaptchaRef = useRef<ReCAPTCHA>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  
+  // Récupérer les catégories de produits depuis le JSON
+  const categories = getCategories();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -54,24 +55,8 @@ export default function ContactPage({ setCurrentPage }: ContactPageProps) {
     setSubmitError(null);
     setIsSubmitting(true);
 
-    // Vérifier reCAPTCHA
-    const recaptchaToken = recaptchaRef.current?.getValue();
-    if (!recaptchaToken) {
-      setSubmitError('Veuillez compléter la vérification reCAPTCHA');
-      setIsSubmitting(false);
-      return;
-    }
-
     // Récupérer les données du formulaire
     const formData = new FormData(e.currentTarget);
-    const contactData: ContactFormData = {
-      fullName: formData.get('fullName') as string,
-      email: formData.get('email') as string,
-      phone: formData.get('phone') as string || undefined,
-      productType: formData.get('productType') as string || '',
-      message: formData.get('message') as string,
-      file: uploadedFile || undefined,
-    };
 
     // Vérifier la taille du fichier (max 10MB)
     if (uploadedFile && uploadedFile.size > 10 * 1024 * 1024) {
@@ -81,17 +66,31 @@ export default function ContactPage({ setCurrentPage }: ContactPageProps) {
     }
 
     try {
-      // Envoyer l'email
-      const result = await sendEmail(contactData, recaptchaToken);
+      // Préparer les données pour Netlify Forms
+      const netlifyFormData = new FormData();
+      netlifyFormData.append('form-name', 'contact');
+      netlifyFormData.append('fullName', formData.get('fullName') as string);
+      netlifyFormData.append('email', formData.get('email') as string);
+      netlifyFormData.append('phone', (formData.get('phone') as string) || '');
+      netlifyFormData.append('productType', (formData.get('productType') as string) || '');
+      netlifyFormData.append('message', formData.get('message') as string);
+      if (uploadedFile) {
+        netlifyFormData.append('file', uploadedFile);
+      }
 
-      if (result.success) {
+      // Envoyer à Netlify Forms
+      const netlifyResponse = await fetch('/', {
+        method: 'POST',
+        body: netlifyFormData,
+      });
+
+      if (netlifyResponse.ok) {
         setFormSubmitted(true);
         // Réinitialiser le formulaire
         formRef.current?.reset();
         setUploadedFile(null);
-        recaptchaRef.current?.reset();
       } else {
-        setSubmitError(result.message);
+        setSubmitError('Une erreur est survenue lors de l\'envoi. Veuillez réessayer plus tard.');
       }
     } catch (error) {
       if (process.env.NODE_ENV === 'development') {
@@ -108,13 +107,13 @@ export default function ContactPage({ setCurrentPage }: ContactPageProps) {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
-            {t.contact.title}
+            {t.contact.requestQuote}
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-4">
             {t.contact.subtitle}
           </p>
           <button
-            onClick={() => setCurrentPage('contact-info')}
+            onClick={() => setCurrentPage('contact')}
             className="text-blue-600 hover:text-blue-700 font-semibold underline"
           >
             {t.contact.contactInfo}
@@ -125,7 +124,23 @@ export default function ContactPage({ setCurrentPage }: ContactPageProps) {
           <h2 className="text-2xl font-bold text-gray-900 mb-6">
             {t.contact.requestQuote}
           </h2>
-          <form ref={formRef} className="space-y-6" onSubmit={handleSubmit}>
+          <form 
+            ref={formRef} 
+            name="contact" 
+            method="POST" 
+            data-netlify="true" 
+            netlify-honeypot="bot-field"
+            className="space-y-6" 
+            onSubmit={handleSubmit}
+          >
+            {/* Champ caché pour Netlify Forms */}
+            <input type="hidden" name="form-name" value="contact" />
+            {/* Honeypot pour la protection anti-spam Netlify */}
+            <div style={{ display: 'none' }}>
+              <label>
+                Ne remplissez pas ce champ si vous êtes humain: <input name="bot-field" />
+              </label>
+            </div>
             {!formSubmitted ? (
               <>
                 <div>
@@ -172,13 +187,12 @@ export default function ContactPage({ setCurrentPage }: ContactPageProps) {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
                   >
                     <option value="">{t.contact.selectProduct}</option>
-                    <option value="flyers">{t.products.flyers}</option>
-                    <option value="cards">{t.products.businessCards}</option>
-                    <option value="brochures">{t.products.brochures}</option>
-                    <option value="rollups">{t.products.rollups}</option>
-                    <option value="banners">{t.products.banners}</option>
-                    <option value="packaging">{t.products.packaging}</option>
-                    <option value="other">Autre</option>
+                    {categories.map((category) => (
+                      <option key={category.slug} value={category.name}>
+                        {getCategoryDisplayName(category.slug)}
+                      </option>
+                    ))}
+                    <option value="other">{language === 'fr' ? 'Autre' : 'Other'}</option>
                   </select>
                 </div>
                 <div>
@@ -258,15 +272,6 @@ export default function ContactPage({ setCurrentPage }: ContactPageProps) {
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent resize-none"
                     placeholder="Décrivez votre projet et vos besoins..."
                   ></textarea>
-                </div>
-
-                {/* reCAPTCHA */}
-                <div className="flex justify-center">
-                  <ReCAPTCHA
-                    ref={recaptchaRef}
-                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ''}
-                    theme="light"
-                  />
                 </div>
 
                 {/* Message d'erreur */}

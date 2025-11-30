@@ -3,7 +3,11 @@
 import React from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-export default function ContactInfoPage() {
+interface ContactInfoPageProps {
+  setCurrentPage?: (page: string) => void;
+}
+
+export default function ContactInfoPage({ setCurrentPage }: ContactInfoPageProps = {}) {
   const { t } = useLanguage();
 
   return (
@@ -13,6 +17,14 @@ export default function ContactInfoPage() {
           <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
             {t.contact.contactInfo}
           </h1>
+          {setCurrentPage && (
+            <button
+              onClick={() => setCurrentPage('quote')}
+              className="mt-4 text-blue-600 hover:text-blue-700 font-semibold underline"
+            >
+              {t.contact.requestQuote}
+            </button>
+          )}
         </div>
 
         <div className="bg-gradient-to-br from-blue-600 to-blue-800 text-white rounded-2xl p-8">

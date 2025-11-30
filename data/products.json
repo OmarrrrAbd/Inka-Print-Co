@@ -1,0 +1,550 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "category": "cartes-affaires",
+      "name": "Cartes d'affaires",
+      "variant": "14pt + Matte Finish",
+      "description": "",
+      "image": "/images/cartes-affaires/14pt-matte.jpg",
+      "slug": "cartes-affaires-14pt-matte-finish",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 2,
+      "category": "cartes-affaires",
+      "name": "Cartes d'affaires",
+      "variant": "16pt + Matte Finish",
+      "description": "",
+      "image": "/images/cartes-affaires/16pt-matte.jpg",
+      "slug": "cartes-affaires-16pt-matte-finish",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 3,
+      "category": "cartes-affaires",
+      "name": "Cartes d'affaires",
+      "variant": "14pt + AQ",
+      "description": "",
+      "image": "/images/cartes-affaires/14pt-aq.jpg",
+      "slug": "cartes-affaires-14pt-aq",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 4,
+      "category": "cartes-affaires",
+      "name": "Cartes d'affaires",
+      "variant": "16pt + AQ",
+      "description": "",
+      "image": "/images/cartes-affaires/16pt-aq.jpg",
+      "slug": "cartes-affaires-16pt-aq",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 5,
+      "category": "cartes-affaires",
+      "name": "Cartes d'affaires",
+      "variant": "13pt Enviro Uncoated",
+      "description": "",
+      "image": "/images/cartes-affaires/13pt-enviro.jpg",
+      "slug": "cartes-affaires-13pt-enviro",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 6,
+      "category": "cartes-affaires",
+      "name": "Cartes d'affaires",
+      "variant": "14pt Writable + AQ (C1S)",
+      "description": "",
+      "image": "/images/cartes-affaires/14pt-writable-aq.jpg",
+      "slug": "cartes-affaires-14pt-writable-aq",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 7,
+      "category": "cartes-affaires",
+      "name": "Cartes d'affaires",
+      "variant": "14pt Writable + UV (C1S)",
+      "description": "",
+      "image": "/images/cartes-affaires/14pt-writable-uv.jpg",
+      "slug": "cartes-affaires-14pt-writable-uv",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 8,
+      "category": "cartes-affaires",
+      "name": "Cartes d'affaires",
+      "variant": "Metallic Foil (Raised)",
+      "description": "",
+      "image": "/images/cartes-affaires/metallic-foil.jpg",
+      "slug": "cartes-affaires-metallic-foil-raised",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 9,
+      "category": "cartes-affaires",
+      "name": "Cartes d'affaires",
+      "variant": "Soft Touch (Suede)",
+      "description": "",
+      "image": "/images/cartes-affaires/soft-touch.jpg",
+      "slug": "cartes-affaires-soft-touch-suede",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 10,
+      "category": "cartes-affaires",
+      "name": "Cartes d'affaires",
+      "variant": "32pt Painted Edge",
+      "description": "",
+      "image": "/images/cartes-affaires/32pt-painted-edge.jpg",
+      "slug": "cartes-affaires-32pt-painted-edge",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 11,
+      "category": "circulaires",
+      "name": "Circulaires",
+      "variant": "Circulaires avec fini mat",
+      "description": "",
+      "image": "/images/circulaires/circulaire-mat.jpg",
+      "slug": "circulaires-fini-mat",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 12,
+      "category": "circulaires",
+      "name": "Circulaires",
+      "variant": "Circulaires sans enduit (100% recyclé)",
+      "description": "",
+      "image": "/images/circulaires/circulaire-recycle.jpg",
+      "slug": "circulaires-sans-enduit-recycle",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 13,
+      "category": "depliants",
+      "name": "Dépliants",
+      "variant": "100lb avec fini mat",
+      "description": "",
+      "image": "/images/depliants/100lb-mat.jpg",
+      "slug": "depliants-100lb-mat",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 14,
+      "category": "depliants",
+      "name": "Dépliants",
+      "variant": "80lb Enviro (Recyclé)",
+      "description": "",
+      "image": "/images/depliants/80lb-enviro.jpg",
+      "slug": "depliants-80lb-enviro",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 15,
+      "category": "cartes-postales",
+      "name": "Carte postale",
+      "variant": "14pt avec fini mat",
+      "description": "",
+      "image": "/images/cartes-postales/14pt-mat.jpg",
+      "slug": "carte-postale-14pt-mat",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 16,
+      "category": "cartes-postales",
+      "name": "Carte postale",
+      "variant": "16pt avec fini mat",
+      "description": "",
+      "image": "/images/cartes-postales/16pt-mat.jpg",
+      "slug": "carte-postale-16pt-mat",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 17,
+      "category": "cartes-postales",
+      "name": "Carte postale",
+      "variant": "14pt + AQ",
+      "description": "",
+      "image": "/images/cartes-postales/14pt-aq.jpg",
+      "slug": "carte-postale-14pt-aq",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 18,
+      "category": "cartes-postales",
+      "name": "Carte postale",
+      "variant": "16pt + AQ",
+      "description": "",
+      "image": "/images/cartes-postales/16pt-aq.jpg",
+      "slug": "carte-postale-16pt-aq",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 19,
+      "category": "cartes-postales",
+      "name": "Carte postale",
+      "variant": "13pt Enviro (Recyclé)",
+      "description": "",
+      "image": "/images/cartes-postales/13pt-enviro.jpg",
+      "slug": "carte-postale-13pt-enviro",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 20,
+      "category": "cartes-postales",
+      "name": "Carte postale",
+      "variant": "14pt AQ - écrivable",
+      "description": "",
+      "image": "/images/cartes-postales/14pt-aq-ecrivable.jpg",
+      "slug": "carte-postale-14pt-aq-ecrivable",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 21,
+      "category": "signets",
+      "name": "Signet",
+      "variant": "14pt avec fini mat",
+      "description": "",
+      "image": "/images/signets/14pt-mat.jpg",
+      "slug": "signet-14pt-mat",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 22,
+      "category": "signets",
+      "name": "Signet",
+      "variant": "14pt UV - avec surface écrivable",
+      "description": "",
+      "image": "/images/signets/14pt-uv-ecrivable.jpg",
+      "slug": "signet-14pt-uv-ecrivable",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 23,
+      "category": "signets",
+      "name": "Signet",
+      "variant": "16pt avec fini mat",
+      "description": "",
+      "image": "/images/signets/16pt-mat.jpg",
+      "slug": "signet-16pt-mat",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 24,
+      "category": "signets",
+      "name": "Signet",
+      "variant": "16pt + UV",
+      "description": "",
+      "image": "/images/signets/16pt-uv.jpg",
+      "slug": "signet-16pt-uv",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 25,
+      "category": "signets",
+      "name": "Signet",
+      "variant": "13pt Enviro (Recyclé)",
+      "description": "",
+      "image": "/images/signets/13pt-enviro.jpg",
+      "slug": "signet-13pt-enviro",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 26,
+      "category": "signets",
+      "name": "Signet",
+      "variant": "13pt Lin sans vernis",
+      "description": "",
+      "image": "/images/signets/13pt-lin.jpg",
+      "slug": "signet-13pt-lin",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 27,
+      "category": "signets",
+      "name": "Signet",
+      "variant": "18pt Laminé mat + Verni",
+      "description": "",
+      "image": "/images/signets/18pt-lamine.jpg",
+      "slug": "signet-18pt-lamine-mat-verni",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 28,
+      "category": "pochettes",
+      "name": "Pochettes corporatives",
+      "variant": "Standard avec fini mat",
+      "description": "",
+      "image": "/images/pochettes/standard-mat.jpg",
+      "slug": "pochette-standard-mat",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 29,
+      "category": "cartes-voeux",
+      "name": "Carte de voeux",
+      "variant": "14pt avec fini mat",
+      "description": "",
+      "image": "/images/cartes-voeux/14pt-mat.jpg",
+      "slug": "carte-voeux-14pt-mat",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 30,
+      "category": "cartes-voeux",
+      "name": "Carte de voeux",
+      "variant": "13pt Enviro (Recyclé)",
+      "description": "",
+      "image": "/images/cartes-voeux/13pt-enviro.jpg",
+      "slug": "carte-voeux-13pt-enviro",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 31,
+      "category": "cartes-voeux",
+      "name": "Carte de voeux",
+      "variant": "14pt + AQ",
+      "description": "",
+      "image": "/images/cartes-voeux/14pt-aq.jpg",
+      "slug": "carte-voeux-14pt-aq",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 32,
+      "category": "affiches",
+      "name": "Affiche",
+      "variant": "100lb avec fini mat",
+      "description": "",
+      "image": "/images/affiches/100lb-mat.jpg",
+      "slug": "affiche-100lb-mat",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 33,
+      "category": "affiches",
+      "name": "Affiche",
+      "variant": "80lb Enviro (Sans enduits)",
+      "description": "",
+      "image": "/images/affiches/80lb-enviro.jpg",
+      "slug": "affiche-80lb-enviro",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 34,
+      "category": "affiches",
+      "name": "Affiche",
+      "variant": "60lb (Sans enduits)",
+      "description": "",
+      "image": "/images/affiches/60lb.jpg",
+      "slug": "affiche-60lb-sans-enduit",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 35,
+      "category": "affiches",
+      "name": "Affiche",
+      "variant": "Sécure 60lb (Sans enduits)",
+      "description": "",
+      "image": "/images/affiches/secure-60lb.jpg",
+      "slug": "affiche-secure-60lb",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 36,
+      "category": "affiches",
+      "name": "Affiche",
+      "variant": "60lb (Autocollant)",
+      "description": "",
+      "image": "/images/affiches/60lb-autocollant.jpg",
+      "slug": "affiche-60lb-autocollant",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 37,
+      "category": "bloc-notes",
+      "name": "Bloc-notes",
+      "variant": "60lb (Sans enduits - 25 pages)",
+      "description": "",
+      "image": "/images/bloc-notes/60lb-25.jpg",
+      "slug": "bloc-notes-60lb-25p",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 38,
+      "category": "bloc-notes",
+      "name": "Bloc-notes",
+      "variant": "60lb (Sans enduits - 50 pages)",
+      "description": "",
+      "image": "/images/bloc-notes/60lb-50.jpg",
+      "slug": "bloc-notes-60lb-50p",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    },
+    {
+      "id": 39,
+      "category": "puzzle",
+      "name": "Puzzle",
+      "variant": "Puzzle personnalisé",
+      "description": "",
+      "image": "/images/puzzle/puzzle.jpg",
+      "slug": "puzzle-personnalise",
+      "quantities": [
+        200,
+        500,
+        1000
+      ]
+    }
+  ]
+}
