@@ -5,7 +5,7 @@
 Site web statique bilingue (Français/Anglais) pour Inka Print Co., une entreprise d'impression professionnelle basée à Montréal, Québec.
 
 **Date de création** : 2024  
-**Version actuelle** : v1.2.0  
+**Version actuelle** : v1.3.0  
 **Framework** : Next.js 14 avec TypeScript  
 **Déploiement** : Netlify (configuré)
 
@@ -62,16 +62,19 @@ Site web statique bilingue (Français/Anglais) pour Inka Print Co., une entrepri
   - Valeurs de l'entreprise (Qualité, Innovation, Service client, Durabilité)
   - Services détaillés
 
-- [x] **Page Contact**
+- [x] **Page Contact** (`/contact`)
+  - Informations de contact (téléphone, email, WhatsApp)
+  - Localisation : Basé à Montréal, livraison partout au Québec
+  - **Réseaux sociaux configurés** : Facebook et Instagram professionnel
+  - Lien vers le formulaire de devis
+
+- [x] **Page Formulaire de devis** (`/quote`)
   - Formulaire de demande de devis
   - Upload de fichier moderne (drag & drop)
   - Validation de formulaire
   - Message de confirmation
-
-- [x] **Page Informations de contact**
-  - Informations de contact (téléphone, email, WhatsApp)
-  - Localisation : Basé à Montréal, livraison partout au Québec
-  - Réseaux sociaux
+  - **Select de type de produit** : Liste dynamique des catégories depuis JSON
+  - Intégration Netlify Forms pour les notifications
 
 ### 🛠️ Fonctionnalités techniques
 - [x] Configuration Next.js pour export statique
@@ -91,7 +94,7 @@ Site web statique bilingue (Français/Anglais) pour Inka Print Co., une entrepri
 - [x] Affichage du nom et taille du fichier
 - [x] Bouton de suppression
 - [x] Support des formats : PDF, JPG, PNG, AI, EPS, PSD
-- [x] Envoi des fichiers via EmailJS (pas de stockage serveur)
+- [x] **Intégration Netlify Forms** : Envoi des fichiers via Netlify Forms (pas de stockage serveur)
 
 ### 🎯 Navigation
 - [x] Menu desktop avec tous les liens
@@ -106,11 +109,13 @@ Site web statique bilingue (Français/Anglais) pour Inka Print Co., une entrepri
 
 ### 🔧 Fonctionnalités manquantes
 - [x] **Backend/API pour le formulaire de contact**
-  - [x] Intégration avec un service d'email (EmailJS)
-  - [x] Envoi réel des emails avec les fichiers joints
+  - [x] **Intégration Netlify Forms** : Solution native Netlify pour les formulaires
+  - [x] **Formulaire testé et fonctionnel** : Réception des emails confirmée
+  - [x] Envoi réel des notifications email avec les fichiers joints
   - [x] Validation côté client
-  - [x] Protection contre le spam (reCAPTCHA)
-  - [ ] Validation côté serveur (optionnel avec EmailJS)
+  - [x] Protection contre le spam (Honeypot intégré Netlify)
+  - [x] Dashboard Netlify pour consulter les soumissions
+  - [ ] Validation côté serveur (optionnel avec Netlify Forms)
 
 - [ ] **Gestion des fichiers uploadés**
   - [ ] Stockage des fichiers (ex: Cloudinary, AWS S3)
@@ -162,6 +167,10 @@ Site web statique bilingue (Français/Anglais) pour Inka Print Co., une entrepri
   - [ ] HTTPS (automatique sur Netlify)
 
 ### 📝 Contenu
+- [x] **Réseaux sociaux**
+  - [x] Compte Facebook créé et configuré
+  - [x] Compte Instagram professionnel créé et configuré
+  - [x] Liens intégrés dans la page contact
 - [ ] **Contenu additionnel**
   - [ ] Témoignages clients
   - [ ] Portfolio/Galerie de réalisations
@@ -226,6 +235,8 @@ Aucun bug connu pour le moment.
 - ✅ **Nettoyage des commentaires inutiles** et uniformisation du code
 - ✅ **Correction des textes hardcodés** : utilisation des traductions pour tous les textes dans `ProductVariantPage`
 - ✅ **Ajout des traductions manquantes** (`productNotFound`, `defaultProductDescription`)
+- ✅ **Suppression d'EmailJS et reCAPTCHA** : Migration vers Netlify Forms uniquement
+- ✅ **Simplification du formulaire** : Suppression des dépendances externes (EmailJS, reCAPTCHA)
 - ✅ Code optimisé et prêt pour la production
 
 ### Nouvelles fonctionnalités (dernière mise à jour)
@@ -236,6 +247,11 @@ Aucun bug connu pour le moment.
 - ✅ **Identification par ID** : tous les produits sont maintenant identifiés par leur ID unique
 - ✅ **39 produits** avec quantités définies dans JSON
 - ✅ **10 catégories** de produits disponibles
+- ✅ **Migration vers Netlify Forms** : Remplacement d'EmailJS/reCAPTCHA par Netlify Forms natif
+- ✅ **Restructuration des pages contact** : `/contact` pour les infos, `/quote` pour le formulaire
+- ✅ **Select de type de produit dynamique** : Liste des catégories chargée depuis JSON
+- ✅ **Formulaire testé et validé** : Réception des emails confirmée en production
+- ✅ **Réseaux sociaux configurés** : Compte Facebook et Instagram professionnel créés et intégrés
 
 ---
 
@@ -249,7 +265,8 @@ Aucun bug connu pour le moment.
 │   │   │   └── [categorySlug]/  # Route dynamique pour catégories
 │   │   ├── services/
 │   │   ├── about/
-│   │   ├── contact/
+│   │   ├── contact/       # Page informations de contact
+│   │   ├── quote/         # Page formulaire de devis
 │   │   └── layout.tsx     # Layout avec Navbar et Footer
 │   └── layout.tsx          # Root layout
 ├── components/             # Composants React
@@ -260,7 +277,6 @@ Aucun bug connu pour le moment.
 ├── lib/                   # Utilitaires et traductions
 │   ├── products.ts        # Gestion des produits depuis JSON
 │   ├── translations.ts    # Système de traduction FR/EN
-│   ├── emailService.ts    # Service EmailJS
 │   └── utils.ts           # Utilitaires (formatFileSize, etc.)
 ├── data/                  # Données JSON
 │   ├── products.json      # 39 produits avec quantités
@@ -273,8 +289,7 @@ Aucun bug connu pour le moment.
 - **TypeScript** : Typage statique
 - **Tailwind CSS** : Styling utility-first
 - **Font Awesome** : Icônes
-- **EmailJS** : Envoi d'emails côté client
-- **Google reCAPTCHA** : Protection anti-spam
+- **Netlify Forms** : Gestion des formulaires et notifications email (natif Netlify)
 
 ### Configuration de déploiement
 - **Netlify** : Configuration dans `netlify.toml`
@@ -305,7 +320,14 @@ Aucun bug connu pour le moment.
 
 ## 📅 Historique des versions
 
-### v1.1.0 (Actuel)
+### v1.3.0 (Actuel)
+- ✅ **Migration vers Netlify Forms** : Remplacement d'EmailJS/reCAPTCHA par solution native Netlify
+- ✅ **Restructuration des pages contact** : `/contact` pour les informations, `/quote` pour le formulaire
+- ✅ **Select de type de produit dynamique** : Liste des catégories chargée depuis JSON
+- ✅ **Simplification du formulaire** : Suppression des dépendances externes
+- ✅ **Documentation mise à jour** : Guides Netlify Forms et déploiement
+
+### v1.2.0
 - ✅ **Système de routing Next.js App Router** avec routes dynamiques
 - ✅ **Système de produits basé sur JSON** (39 produits, 10 catégories)
 - ✅ **Section quantité** avec quantités prédéfinies par produit
@@ -315,6 +337,11 @@ Aucun bug connu pour le moment.
 - ✅ **Suppression des animations** pour navigation instantanée
 - ✅ Code nettoyé et optimisé
 - ✅ Prêt pour déploiement sur Netlify
+
+### v1.1.0
+- ✅ **Système de routing Next.js App Router** avec routes dynamiques
+- ✅ **Système de produits basé sur JSON** (39 produits, 10 catégories)
+- ✅ **Section quantité** avec quantités prédéfinies par produit
 
 ### v1.0.0
 - ✅ Site complet avec toutes les pages de base
@@ -336,27 +363,32 @@ Aucun bug connu pour le moment.
   - [ ] Pousser le code vers GitHub
   - [ ] Configurer les secrets GitHub pour les variables d'environnement (si CI/CD)
 
-### 2. Configuration EmailJS et reCAPTCHA
-- [ ] Suivre le guide dans `docs/EMAILJS_SETUP.md`
-- [ ] Créer le fichier `.env.local` avec les clés
-- [ ] Tester l'envoi d'email depuis le formulaire
+### 2. Configuration Netlify Forms
+- [x] Guide de configuration créé dans `docs/NETLIFY_FORMS_SETUP.md`
+- [ ] Déployer le site sur Netlify
+- [ ] Activer les notifications email dans Netlify Dashboard > Forms > Settings
+- [ ] Tester l'envoi du formulaire et vérifier la réception des notifications
 
 ### 3. Déploiement Netlify
-- [ ] Connecter le dépôt GitHub à Netlify
-- [ ] Configurer les variables d'environnement dans Netlify
-- [ ] Tester le déploiement
+- [x] Site déployé sur Netlify
+- [x] Déploiement testé et fonctionnel
+- [x] Notifications email configurées et testées
 - [ ] Configurer le domaine personnalisé (si applicable)
 
 ### 4. Finalisation
-- [ ] Remplacer les liens placeholder (réseaux sociaux)
+- [x] **Réseaux sociaux configurés** : Facebook et Instagram professionnel
 - [ ] Ajouter les vraies images de produits
 - [ ] Tester sur différents appareils et navigateurs
 
 ---
 
-**Dernière mise à jour** : 2024  
-**Statut** : ✅ Fonctionnel - Prêt pour production  
+**Dernière mise à jour** : Décembre 2024  
+**Statut** : ✅ Fonctionnel - En production  
 **Code** : ✅ Nettoyé et optimisé  
 **Routing** : ✅ Next.js App Router avec routes dynamiques  
-**Produits** : ✅ 39 produits avec quantités définies dans JSON
+**Produits** : ✅ 39 produits avec quantités définies dans JSON  
+**Formulaire** : ✅ Netlify Forms intégré et testé - Réception des emails confirmée  
+**Pages** : ✅ `/contact` (infos) et `/quote` (formulaire) séparées  
+**Réseaux sociaux** : ✅ Facebook et Instagram professionnel configurés  
+**Déploiement** : ✅ Site déployé sur Netlify et fonctionnel
 

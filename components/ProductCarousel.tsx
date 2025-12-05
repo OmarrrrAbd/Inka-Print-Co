@@ -51,7 +51,7 @@ export default function ProductCarousel({ setCurrentPage }: ProductCarouselProps
     if (isAutoPlaying) {
       intervalRef.current = setInterval(() => {
         nextSlide();
-      }, 5000); // Change de slide toutes les 5 secondes
+      }, 3000); // Change de slide toutes les 3 secondes
     }
 
     return () => {
@@ -67,30 +67,30 @@ export default function ProductCarousel({ setCurrentPage }: ProductCarouselProps
 
   const getCategoryColor = (index: number) => {
     const colors = [
-      'from-blue-50 to-blue-100 border-blue-200',
-      'from-purple-50 to-purple-100 border-purple-200',
-      'from-green-50 to-green-100 border-green-200',
-      'from-orange-50 to-orange-100 border-orange-200',
+      'from-ink-primary-50 to-white border-ink-primary-100',
+      'from-coral-accent-50 to-white border-coral-accent-100',
+      'from-slate-neutral-50 to-white border-slate-neutral-100',
+      'from-ink-primary-50 to-white border-ink-primary-100',
     ];
     return colors[index % colors.length];
   };
 
   const getCategoryIconColor = (index: number) => {
     const colors = [
-      'bg-blue-600',
-      'bg-purple-600',
-      'bg-green-600',
-      'bg-orange-600',
+      'bg-ink-primary',
+      'bg-coral-accent',
+      'bg-slate-neutral',
+      'bg-ink-primary',
     ];
     return colors[index % colors.length];
   };
 
   const getCategoryTextColor = (index: number) => {
     const colors = [
-      'text-blue-600 hover:text-blue-700',
-      'text-purple-600 hover:text-purple-700',
-      'text-green-600 hover:text-green-700',
-      'text-orange-600 hover:text-orange-700',
+      'text-ink-primary hover:text-ink-primary-dark',
+      'text-coral-accent hover:text-coral-accent-dark',
+      'text-slate-neutral-dark hover:text-ink-primary',
+      'text-ink-primary hover:text-ink-primary-dark',
     ];
     return colors[index % colors.length];
   };
@@ -106,18 +106,17 @@ export default function ProductCarousel({ setCurrentPage }: ProductCarouselProps
       'cartes-voeux': 'fa-heart',
       'affiches': 'fa-image',
       'bloc-notes': 'fa-sticky-note',
-      'puzzle': 'fa-puzzle-piece',
     };
     return icons[categorySlug] || 'fa-box';
   };
 
-  // Obtenir l'image de la catégorie (premier produit de la catégorie)
+  // Obtenir l'image de la catégorie (image dédiée ou premier produit de la catégorie)
   const getCategoryImage = (category: Category) => {
-    if (category.products && category.products.length > 0) {
-      const firstProduct = category.products[0];
-      return firstProduct.image;
-    }
-    return '';
+    // D'abord, essayer d'utiliser l'image dédiée de la catégorie
+    const categoryImage = `/images/categories/${category.slug}.jpg`;
+    // Si l'image n'existe pas, on utilisera le fallback (premier produit)
+    // Le composant gérera l'erreur avec onError
+    return categoryImage;
   };
 
   // Calculer l'index réel en tenant compte de la duplication (commencer au milieu)
@@ -131,27 +130,28 @@ export default function ProductCarousel({ setCurrentPage }: ProductCarouselProps
         onClick={prevSlide}
         onMouseEnter={() => setIsAutoPlaying(false)}
         onMouseLeave={() => setIsAutoPlaying(true)}
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white rounded-full p-3 shadow-lg hover:bg-gray-100 transition-all opacity-80 hover:opacity-100 hidden sm:block"
+        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white rounded-full p-3 shadow-lg hover:bg-ink-primary hover:text-white transition-all opacity-80 hover:opacity-100 hidden sm:block border border-ink-primary-100"
         aria-label="Précédent"
       >
-        <i className="fas fa-chevron-left text-gray-700 text-xl"></i>
+        <i className="fas fa-chevron-left text-ink-primary text-xl"></i>
       </button>
       <button
         onClick={nextSlide}
         onMouseEnter={() => setIsAutoPlaying(false)}
         onMouseLeave={() => setIsAutoPlaying(true)}
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white rounded-full p-3 shadow-lg hover:bg-gray-100 transition-all opacity-80 hover:opacity-100 hidden sm:block"
+        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white rounded-full p-3 shadow-lg hover:bg-ink-primary hover:text-white transition-all opacity-80 hover:opacity-100 hidden sm:block border border-ink-primary-100"
         aria-label="Suivant"
       >
-        <i className="fas fa-chevron-right text-gray-700 text-xl"></i>
+        <i className="fas fa-chevron-right text-ink-primary text-xl"></i>
       </button>
 
       {/* Container du carousel */}
       <div className="overflow-hidden">
         <div
-          className="flex transition-transform duration-500 ease-in-out"
+          className="flex transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]"
           style={{
             transform: `translateX(-${realIndex * (100 / productsPerView)}%)`,
+            willChange: 'transform',
           }}
         >
           {duplicatedCategories.map((category, index) => {
@@ -164,43 +164,41 @@ export default function ProductCarousel({ setCurrentPage }: ProductCarouselProps
                 style={{ width: `${100 / productsPerView}%` }}
               >
                 <div
-                  className={`bg-gradient-to-br ${getCategoryColor(colorIndex)} rounded-xl p-6 hover:shadow-lg transition-all cursor-pointer border ${getCategoryColor(colorIndex).split(' ')[2]} hover:scale-105 h-full flex flex-col`}
+                  className={`bg-gradient-to-br ${getCategoryColor(colorIndex)} rounded-xl p-6 hover:shadow-xl transition-all cursor-pointer border hover:scale-105 h-full flex flex-col group`}
                   onClick={() => handleCategoryClick(category.slug)}
                 >
                   {/* Image de la catégorie */}
-                  <div className="w-full h-48 bg-gray-200 rounded-lg mb-4 overflow-hidden flex items-center justify-center">
-                    {categoryImage && categoryImage !== '' ? (
-                      // eslint-disable-next-line @next/next/no-img-element
-                      <img
-                        src={categoryImage}
-                        alt={category.name}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          const target = e.target as HTMLImageElement;
-                          target.style.display = 'none';
-                          const parent = target.parentElement;
-                          if (parent) {
-                            const icon = document.createElement('i');
-                            icon.className = `fas ${getCategoryIcon(category.slug)} text-gray-400 text-6xl`;
-                            parent.appendChild(icon);
-                          }
-                        }}
-                      />
-                    ) : (
-                      <div className={`w-20 h-20 ${getCategoryIconColor(colorIndex)} rounded-lg flex items-center justify-center`}>
-                        <i className={`fas ${getCategoryIcon(category.slug)} text-white text-4xl`}></i>
-                      </div>
-                    )}
+                  <div className="w-full h-48 bg-slate-neutral-100 rounded-lg mb-4 overflow-hidden flex items-center justify-center relative">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={categoryImage}
+                      alt={category.name}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                        const parent = target.parentElement;
+                        if (parent) {
+                          // Afficher l'icône en fallback si l'image n'existe pas
+                          const iconContainer = document.createElement('div');
+                          iconContainer.className = `w-20 h-20 ${getCategoryIconColor(colorIndex)} rounded-lg flex items-center justify-center shadow-lg`;
+                          const icon = document.createElement('i');
+                          icon.className = `fas ${getCategoryIcon(category.slug)} text-white text-4xl`;
+                          iconContainer.appendChild(icon);
+                          parent.appendChild(iconContainer);
+                        }
+                      }}
+                    />
                   </div>
                   
-                  <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                  <h3 className="text-xl font-semibold text-slate-neutral-dark mb-2">
                     {category.name}
                   </h3>
-                  <p className="text-gray-600 mb-4 text-sm line-clamp-2 flex-grow">
+                  <p className="text-slate-neutral mb-4 text-sm line-clamp-2 flex-grow">
                     {category.products.length} {category.products.length === 1 ? 'produit' : 'produits'} disponible{category.products.length > 1 ? 's' : ''}
                   </p>
-                  <button className={`${getCategoryTextColor(colorIndex)} font-semibold flex items-center`}>
-                    {t.products.seeProduct} <i className="fas fa-arrow-right ml-2"></i>
+                  <button className={`${getCategoryTextColor(colorIndex)} font-semibold flex items-center group`}>
+                    {t.products.seeProduct} <i className="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
                   </button>
                 </div>
               </div>
@@ -221,8 +219,8 @@ export default function ProductCarousel({ setCurrentPage }: ProductCarouselProps
             }}
             className={`h-2 rounded-full transition-all ${
               currentIndex === index
-                ? 'bg-blue-600 w-8'
-                : 'bg-gray-300 hover:bg-gray-400 w-2'
+                ? 'bg-ink-primary w-8 shadow-md shadow-ink-primary/30'
+                : 'bg-slate-neutral-100 hover:bg-slate-neutral w-2'
             }`}
             aria-label={`Aller à la slide ${index + 1}`}
           />

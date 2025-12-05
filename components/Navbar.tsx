@@ -39,8 +39,8 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
               onClick={() => setCurrentPage('home')}
               className={`transition-colors ${
                 currentPage === 'home'
-                  ? 'text-blue-600 font-semibold'
-                  : 'text-gray-700 hover:text-blue-600'
+                  ? 'text-ink-primary font-semibold'
+                  : 'text-slate-neutral-dark hover:text-ink-primary'
               }`}
             >
               {t.nav.home}
@@ -49,8 +49,8 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
               onClick={() => setCurrentPage('catalogue')}
               className={`transition-colors ${
                 currentPage === 'catalogue'
-                  ? 'text-blue-600 font-semibold'
-                  : 'text-gray-700 hover:text-blue-600'
+                  ? 'text-ink-primary font-semibold'
+                  : 'text-slate-neutral-dark hover:text-ink-primary'
               }`}
             >
               {t.nav.catalogue}
@@ -59,8 +59,8 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
               onClick={() => setCurrentPage('services')}
               className={`transition-colors ${
                 currentPage === 'services'
-                  ? 'text-blue-600 font-semibold'
-                  : 'text-gray-700 hover:text-blue-600'
+                  ? 'text-ink-primary font-semibold'
+                  : 'text-slate-neutral-dark hover:text-ink-primary'
               }`}
             >
               {t.nav.services}
@@ -69,8 +69,8 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
               onClick={() => setCurrentPage('about')}
               className={`transition-colors ${
                 currentPage === 'about'
-                  ? 'text-blue-600 font-semibold'
-                  : 'text-gray-700 hover:text-blue-600'
+                  ? 'text-ink-primary font-semibold'
+                  : 'text-slate-neutral-dark hover:text-ink-primary'
               }`}
             >
               {t.nav.about}
@@ -79,21 +79,21 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
               onClick={() => setCurrentPage('contact')}
               className={`transition-colors ${
                 currentPage === 'contact'
-                  ? 'text-blue-600 font-semibold'
-                  : 'text-gray-700 hover:text-blue-600'
+                  ? 'text-ink-primary font-semibold'
+                  : 'text-slate-neutral-dark hover:text-ink-primary'
               }`}
             >
               {t.nav.contact}
             </button>
             <button
               onClick={() => setCurrentPage('quote')}
-              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors font-semibold"
+              className="bg-coral-accent text-white px-6 py-2 rounded-lg hover:bg-coral-accent-dark transition-all transform hover:scale-105 shadow-md shadow-coral-accent/30 font-semibold"
             >
               {t.nav.requestQuote}
             </button>
             <button
               onClick={toggleLanguage}
-              className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors font-semibold"
+              className="px-4 py-2 border border-slate-neutral-200 rounded-lg hover:bg-slate-neutral-50 transition-colors font-semibold"
             >
               {language === 'fr' ? 'EN' : 'FR'}
             </button>
@@ -102,13 +102,13 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
           <div className="flex items-center space-x-4 md:hidden">
             <button
               onClick={toggleLanguage}
-              className="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors text-sm font-semibold"
+              className="px-3 py-2 border border-slate-neutral-200 rounded-lg hover:bg-slate-neutral-50 transition-colors text-sm font-semibold"
             >
               {language === 'fr' ? 'EN' : 'FR'}
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="text-gray-700"
+              className="text-slate-neutral-dark"
             >
               <i className="fas fa-bars text-xl"></i>
             </button>
@@ -130,7 +130,7 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
                   setCurrentPage('home');
                   setMobileMenuOpen(false);
                 }}
-                className="block w-full text-left py-2 text-gray-700 hover:text-blue-600"
+                className="block w-full text-left py-2 text-slate-neutral-dark hover:text-ink-primary transition-colors"
               >
                 {t.nav.home}
               </button>
@@ -139,7 +139,7 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
                   setCurrentPage('catalogue');
                   setMobileMenuOpen(false);
                 }}
-                className="block w-full text-left py-2 text-gray-700 hover:text-blue-600"
+                className="block w-full text-left py-2 text-slate-neutral-dark hover:text-ink-primary transition-colors"
               >
                 {t.nav.catalogue}
               </button>
@@ -148,7 +148,7 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
                   setCurrentPage('services');
                   setMobileMenuOpen(false);
                 }}
-                className="block w-full text-left py-2 text-gray-700 hover:text-blue-600"
+                className="block w-full text-left py-2 text-slate-neutral-dark hover:text-ink-primary transition-colors"
               >
                 {t.nav.services}
               </button>
@@ -157,7 +157,7 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
                   setCurrentPage('about');
                   setMobileMenuOpen(false);
                 }}
-                className="block w-full text-left py-2 text-gray-700 hover:text-blue-600"
+                className="block w-full text-left py-2 text-slate-neutral-dark hover:text-ink-primary transition-colors"
               >
                 {t.nav.about}
               </button>
@@ -166,7 +166,7 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
                   setCurrentPage('contact');
                   setMobileMenuOpen(false);
                 }}
-                className="block w-full text-left py-2 text-gray-700 hover:text-blue-600"
+                className="block w-full text-left py-2 text-slate-neutral-dark hover:text-ink-primary transition-colors"
               >
                 {t.nav.contact}
               </button>
@@ -175,7 +175,7 @@ export default function Navbar({ currentPage, setCurrentPage }: NavbarProps) {
                   setCurrentPage('quote');
                   setMobileMenuOpen(false);
                 }}
-                className="bg-blue-600 text-white px-6 py-3 rounded-lg w-full font-semibold"
+                className="bg-coral-accent text-white px-6 py-3 rounded-lg w-full font-semibold hover:bg-coral-accent-dark transition-all shadow-md"
               >
                 {t.nav.requestQuote}
               </button>

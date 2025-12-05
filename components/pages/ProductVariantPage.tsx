@@ -58,10 +58,10 @@ export default function ProductVariantPage({ categorySlug, setCurrentPage }: Pro
     return (
       <section className="py-16 sm:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">{t.products.productNotFound}</h1>
+          <h1 className="text-4xl font-bold text-slate-neutral-dark mb-4">{t.products.productNotFound}</h1>
           <button
             onClick={() => setCurrentPage('catalogue')}
-            className="text-blue-600 hover:text-blue-700 font-semibold"
+            className="text-ink-primary hover:text-ink-primary-dark font-semibold transition-colors"
           >
             {t.products.backToCatalogue}
           </button>
@@ -73,55 +73,62 @@ export default function ProductVariantPage({ categorySlug, setCurrentPage }: Pro
   return (
     <section className="py-16 sm:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <button
-          onClick={() => setCurrentPage('catalogue')}
-          className="text-blue-600 font-semibold mb-8 flex items-center hover:text-blue-700"
-        >
-          <i className="fas fa-arrow-left mr-2"></i> {t.products.backToCatalogue}
-        </button>
+          <button
+            onClick={() => setCurrentPage('catalogue')}
+            className="text-ink-primary font-semibold mb-8 flex items-center hover:text-ink-primary-dark transition-colors"
+          >
+            <i className="fas fa-arrow-left mr-2"></i> {t.products.backToCatalogue}
+          </button>
 
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Image */}
+          {/* Image avec zoom professionnel */}
           <div>
-            <div className="w-full h-96 bg-gray-200 rounded-xl shadow-lg flex items-center justify-center mb-4 overflow-hidden">
-              {selectedProduct.image && selectedProduct.image !== '' ? (
-                // eslint-disable-next-line @next/next/no-img-element
+            <div className="w-full h-96 bg-slate-neutral-100 rounded-xl shadow-lg mb-4 overflow-hidden relative group cursor-zoom-in">
+              <div className="w-full h-full overflow-hidden">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src={selectedProduct.image}
-                  alt={selectedProduct.variant}
-                  className="w-full h-full object-cover"
+                  src={`/images/categories/${categorySlug}.jpg`}
+                  alt={selectedProduct.name}
+                  className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-150"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.style.display = 'none';
-                    const parent = target.parentElement;
+                    const parent = target.parentElement?.parentElement;
                     if (parent) {
-                      const icon = document.createElement('i');
-                      icon.className = 'fas fa-image text-gray-400 text-6xl';
+                      const icon = document.createElement('div');
+                      icon.className = 'w-full h-full flex items-center justify-center';
+                      const iconElement = document.createElement('i');
+                      iconElement.className = 'fas fa-image text-slate-neutral text-6xl';
+                      icon.appendChild(iconElement);
                       parent.appendChild(icon);
                     }
                   }}
                 />
-              ) : (
-                <i className="fas fa-image text-gray-400 text-6xl"></i>
-              )}
+              </div>
+              {/* Overlay subtil pour effet professionnel */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/0 via-black/0 to-black/0 group-hover:from-black/5 group-hover:via-black/0 group-hover:to-black/0 transition-all duration-700 pointer-events-none"></div>
+              {/* Indicateur de zoom */}
+              <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+                <i className="fas fa-search-plus text-ink-primary text-sm"></i>
+              </div>
             </div>
           </div>
 
           {/* Détails */}
           <div>
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+            <h1 className="text-4xl font-bold text-slate-neutral-dark mb-4">
               {selectedProduct.name}
             </h1>
-            <p className="text-xl text-gray-600 mb-2 font-semibold">
+            <p className="text-xl text-slate-neutral mb-2 font-semibold">
               {selectedProduct.variant}
             </p>
-            <p className="text-lg text-gray-600 mb-8">
+            <p className="text-lg text-slate-neutral mb-8">
               {selectedProduct.description || t.products.defaultProductDescription}
             </p>
 
             {/* Sélecteur de variants */}
             <div className="mb-8">
-              <label className="block text-sm font-semibold text-gray-700 mb-3">
+              <label className="block text-sm font-semibold text-slate-neutral-dark mb-3">
                 {t.products.chooseVariant}
               </label>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -131,8 +138,8 @@ export default function ProductVariantPage({ categorySlug, setCurrentPage }: Pro
                     onClick={() => handleVariantChange(variant.id)}
                     className={`px-4 py-3 rounded-lg font-medium transition-all text-left ${
                       selectedProduct.id === variant.id
-                        ? 'bg-blue-600 text-white shadow-lg'
-                        : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                        ? 'bg-ink-primary text-white shadow-lg shadow-ink-primary/30'
+                        : 'bg-slate-neutral-50 text-slate-neutral-dark hover:bg-slate-neutral-100 border border-slate-neutral-100'
                     }`}
                   >
                     {variant.variant}
@@ -144,7 +151,7 @@ export default function ProductVariantPage({ categorySlug, setCurrentPage }: Pro
             {/* Sélecteur de quantité */}
             {selectedProduct.quantities && selectedProduct.quantities.length > 0 && (
               <div className="mb-8">
-                <label className="block text-sm font-semibold text-gray-700 mb-3">
+                <label className="block text-sm font-semibold text-slate-neutral-dark mb-3">
                   {t.products.quantity}
                 </label>
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
@@ -154,8 +161,8 @@ export default function ProductVariantPage({ categorySlug, setCurrentPage }: Pro
                       onClick={() => setQuantity(qty)}
                       className={`px-4 py-3 rounded-lg font-medium transition-all ${
                         quantity === qty
-                          ? 'bg-blue-600 text-white shadow-lg'
-                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                          ? 'bg-coral-accent text-white shadow-lg shadow-coral-accent/30'
+                          : 'bg-slate-neutral-50 text-slate-neutral-dark hover:bg-slate-neutral-100 border border-slate-neutral-100'
                       }`}
                     >
                       {qty.toLocaleString()}
@@ -166,25 +173,25 @@ export default function ProductVariantPage({ categorySlug, setCurrentPage }: Pro
             )}
 
             {/* Spécifications */}
-            <div className="bg-gray-50 rounded-xl p-6 mb-8">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">
+            <div className="bg-slate-neutral-50 rounded-xl p-6 mb-8 border border-slate-neutral-100">
+              <h3 className="text-xl font-semibold text-slate-neutral-dark mb-4">
                 {t.products.specifications}
               </h3>
-              <div className="space-y-2 text-gray-700">
+              <div className="space-y-2 text-slate-neutral-dark">
                 <div className="flex items-start">
-                  <i className="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
+                  <i className="fas fa-check-circle text-ink-primary mt-1 mr-3"></i>
                   <div>
                     <span className="font-semibold">{t.products.category}</span> {getCategoryDisplayName(selectedProduct.category)}
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <i className="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
+                  <i className="fas fa-check-circle text-ink-primary mt-1 mr-3"></i>
                   <div>
                     <span className="font-semibold">{t.products.variant}</span> {selectedProduct.variant}
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <i className="fas fa-check-circle text-blue-600 mt-1 mr-3"></i>
+                  <i className="fas fa-check-circle text-ink-primary mt-1 mr-3"></i>
                   <div>
                     <span className="font-semibold">{t.products.reference}</span> #{selectedProduct.id}
                   </div>
@@ -193,8 +200,8 @@ export default function ProductVariantPage({ categorySlug, setCurrentPage }: Pro
             </div>
 
             <button
-              onClick={() => setCurrentPage('contact')}
-              className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors w-full text-lg"
+              onClick={() => setCurrentPage('quote')}
+              className="bg-coral-accent text-white px-8 py-4 rounded-lg font-semibold hover:bg-coral-accent-dark transition-all transform hover:scale-105 shadow-lg shadow-coral-accent/30 w-full text-lg"
             >
               {t.products.requestPersonalizedQuote}
             </button>

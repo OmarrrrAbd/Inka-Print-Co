@@ -531,20 +531,6 @@
         500,
         1000
       ]
-    },
-    {
-      "id": 39,
-      "category": "puzzle",
-      "name": "Puzzle",
-      "variant": "Puzzle personnalisé",
-      "description": "",
-      "image": "/images/puzzle/puzzle.jpg",
-      "slug": "puzzle-personnalise",
-      "quantities": [
-        200,
-        500,
-        1000
-      ]
     }
   ]
 }

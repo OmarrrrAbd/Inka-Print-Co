@@ -10,7 +10,7 @@ interface ContactPageProps {
 }
 
 export default function ContactPage({ setCurrentPage }: ContactPageProps) {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -71,7 +71,6 @@ export default function ContactPage({ setCurrentPage }: ContactPageProps) {
       netlifyFormData.append('form-name', 'contact');
       netlifyFormData.append('fullName', formData.get('fullName') as string);
       netlifyFormData.append('email', formData.get('email') as string);
-      netlifyFormData.append('phone', (formData.get('phone') as string) || '');
       netlifyFormData.append('productType', (formData.get('productType') as string) || '');
       netlifyFormData.append('message', formData.get('message') as string);
       if (uploadedFile) {
@@ -106,22 +105,22 @@ export default function ContactPage({ setCurrentPage }: ContactPageProps) {
     <section className="py-16 sm:py-24 bg-white">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl sm:text-5xl font-bold text-slate-neutral-dark mb-4">
             {t.contact.requestQuote}
           </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto mb-4">
+          <p className="text-lg text-slate-neutral max-w-2xl mx-auto mb-4">
             {t.contact.subtitle}
           </p>
           <button
             onClick={() => setCurrentPage('contact')}
-            className="text-blue-600 hover:text-blue-700 font-semibold underline"
+            className="text-ink-primary hover:text-ink-primary-dark font-semibold underline transition-colors"
           >
             {t.contact.contactInfo}
           </button>
         </div>
 
-        <div className="bg-gray-50 rounded-2xl p-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">
+        <div className="bg-slate-neutral-50 rounded-2xl p-8 shadow-lg">
+          <h2 className="text-2xl font-bold text-slate-neutral-dark mb-6">
             {t.contact.requestQuote}
           </h2>
           <form 
@@ -144,47 +143,36 @@ export default function ContactPage({ setCurrentPage }: ContactPageProps) {
             {!formSubmitted ? (
               <>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-slate-neutral-dark mb-2">
                     {t.contact.fullName}
                   </label>
                   <input
                     type="text"
                     name="fullName"
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-slate-neutral-100 rounded-lg focus:ring-2 focus:ring-ink-primary focus:border-ink-primary transition-all"
                     placeholder="Jean Dupont"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-slate-neutral-dark mb-2">
                     {t.contact.emailLabel}
                   </label>
                   <input
                     type="email"
                     name="email"
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-slate-neutral-100 rounded-lg focus:ring-2 focus:ring-ink-primary focus:border-ink-primary transition-all"
                     placeholder="jean.dupont@exemple.fr"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    {t.contact.phoneLabel}
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
-                    placeholder="+1 (514) 123-4567"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-slate-neutral-dark mb-2">
                     {t.contact.productType}
                   </label>
                   <select
                     name="productType"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent"
+                    className="w-full px-4 py-3 border border-slate-neutral-100 rounded-lg focus:ring-2 focus:ring-ink-primary focus:border-ink-primary transition-all"
                   >
                     <option value="">{t.contact.selectProduct}</option>
                     {categories.map((category) => (
@@ -192,11 +180,11 @@ export default function ContactPage({ setCurrentPage }: ContactPageProps) {
                         {getCategoryDisplayName(category.slug)}
                       </option>
                     ))}
-                    <option value="other">{language === 'fr' ? 'Autre' : 'Other'}</option>
+                    <option value="other">{t.contact.other}</option>
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-slate-neutral-dark mb-2">
                     {t.contact.uploadFile}
                   </label>
                   <input
@@ -213,21 +201,21 @@ export default function ContactPage({ setCurrentPage }: ContactPageProps) {
                     onDrop={handleDrop}
                     className={`relative border-2 border-dashed rounded-xl p-8 text-center cursor-pointer transition-all ${
                       isDragging
-                        ? 'border-blue-500 bg-blue-50'
+                        ? 'border-coral-accent bg-coral-accent-50'
                         : uploadedFile
-                        ? 'border-green-400 bg-green-50'
-                        : 'border-gray-300 bg-gray-50 hover:border-blue-400 hover:bg-blue-50'
+                        ? 'border-coral-accent bg-coral-accent-50'
+                        : 'border-slate-neutral-100 bg-slate-neutral-50 hover:border-ink-primary hover:bg-ink-primary-50'
                     }`}
                   >
                     {uploadedFile ? (
                       <div className="space-y-2">
-                        <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                          <i className="fas fa-check-circle text-green-600 text-2xl"></i>
+                        <div className="w-16 h-16 bg-coral-accent-50 rounded-full flex items-center justify-center mx-auto mb-3">
+                          <i className="fas fa-check-circle text-coral-accent text-2xl"></i>
                         </div>
-                        <p className="text-sm font-semibold text-gray-900">
+                        <p className="text-sm font-semibold text-slate-neutral-dark">
                           {uploadedFile.name}
                         </p>
-                        <p className="text-xs text-gray-500">
+                        <p className="text-xs text-slate-neutral">
                           {formatFileSize(uploadedFile.size)}
                         </p>
                         <button
@@ -246,14 +234,14 @@ export default function ContactPage({ setCurrentPage }: ContactPageProps) {
                       </div>
                     ) : (
                       <div className="space-y-3">
-                        <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto">
-                          <i className="fas fa-cloud-upload-alt text-blue-600 text-2xl"></i>
+                        <div className="w-16 h-16 bg-ink-primary-50 rounded-full flex items-center justify-center mx-auto">
+                          <i className="fas fa-cloud-upload-alt text-ink-primary text-2xl"></i>
                         </div>
                         <div>
-                          <p className="text-sm font-semibold text-gray-700 mb-1">
+                          <p className="text-sm font-semibold text-slate-neutral-dark mb-1">
                             Cliquez pour téléverser ou glissez-déposez
                           </p>
-                          <p className="text-xs text-gray-500">
+                          <p className="text-xs text-slate-neutral">
                             PDF, JPG, PNG, AI, EPS, PSD (max 10MB)
                           </p>
                         </div>
@@ -262,14 +250,14 @@ export default function ContactPage({ setCurrentPage }: ContactPageProps) {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                  <label className="block text-sm font-semibold text-slate-neutral-dark mb-2">
                     {t.contact.message}
                   </label>
                   <textarea
                     name="message"
                     required
                     rows={5}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent resize-none"
+                    className="w-full px-4 py-3 border border-slate-neutral-100 rounded-lg focus:ring-2 focus:ring-ink-primary focus:border-ink-primary resize-none transition-all"
                     placeholder="Décrivez votre projet et vos besoins..."
                   ></textarea>
                 </div>
@@ -287,7 +275,7 @@ export default function ContactPage({ setCurrentPage }: ContactPageProps) {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed flex items-center justify-center"
+                  className="w-full bg-coral-accent text-white px-8 py-4 rounded-lg font-semibold hover:bg-coral-accent-dark transition-all transform hover:scale-[1.02] disabled:bg-slate-neutral disabled:cursor-not-allowed disabled:transform-none flex items-center justify-center shadow-lg shadow-coral-accent/30"
                 >
                   {isSubmitting ? (
                     <>
@@ -301,13 +289,13 @@ export default function ContactPage({ setCurrentPage }: ContactPageProps) {
               </>
             ) : (
               <div className="text-center py-8">
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <i className="fas fa-check text-green-600 text-2xl"></i>
+                <div className="w-16 h-16 bg-coral-accent-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <i className="fas fa-check text-coral-accent text-2xl"></i>
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                <h3 className="text-xl font-semibold text-slate-neutral-dark mb-2">
                   {t.contact.messageSent}
                 </h3>
-                <p className="text-gray-600">{t.contact.messageSentDesc}</p>
+                <p className="text-slate-neutral">{t.contact.messageSentDesc}</p>
               </div>
             )}
           </form>

@@ -63,7 +63,6 @@ export const getCategoryDisplayName = (categorySlug: string): string => {
     'cartes-voeux': 'Cartes de voeux',
     'affiches': 'Affiches',
     'bloc-notes': 'Bloc-notes',
-    'puzzle': 'Puzzle',
   };
   return names[categorySlug] || categorySlug;
 };

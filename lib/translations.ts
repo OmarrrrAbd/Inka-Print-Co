@@ -98,16 +98,13 @@ export interface Translations {
     title: string;
     subtitle: string;
     contactInfo: string;
-    phone: string;
     email: string;
-    whatsapp: string;
     location: string;
     locationDesc: string;
     followUs: string;
     requestQuote: string;
     fullName: string;
     emailLabel: string;
-    phoneLabel: string;
     productType: string;
     selectProduct: string;
     message: string;
@@ -116,6 +113,7 @@ export interface Translations {
     messageSentDesc: string;
     uploadFile: string;
     fileUploaded: string;
+    other: string;
   };
   about: {
     title: string;
@@ -244,16 +242,13 @@ export const translations: Record<Language, Translations> = {
       title: 'Contactez-nous',
       subtitle: 'Nous sommes là pour répondre à toutes vos questions et vous accompagner dans vos projets d\'impression',
       contactInfo: 'Informations de contact',
-      phone: 'Téléphone',
       email: 'Email',
-      whatsapp: 'WhatsApp',
       location: 'Localisation',
       locationDesc: 'Basé à Montréal, livraison partout au Québec. Qualité et rapidité garanties.',
       followUs: 'Suivez-nous',
       requestQuote: 'Demander un devis',
       fullName: 'Nom complet *',
       emailLabel: 'Email *',
-      phoneLabel: 'Téléphone',
       productType: 'Type de produit',
       selectProduct: 'Sélectionnez un produit',
       message: 'Message *',
@@ -262,6 +257,7 @@ export const translations: Record<Language, Translations> = {
       messageSentDesc: 'Nous vous répondrons dans les plus brefs délais.',
       uploadFile: 'Téléverser un fichier',
       fileUploaded: 'Fichier téléversé',
+      other: 'Autre',
     },
     about: {
       title: 'À propos de nous',
@@ -287,7 +283,7 @@ export const translations: Record<Language, Translations> = {
       products: 'Produits',
       company: 'Entreprise',
       contact: 'Contact',
-      rights: '© 2024 Inka Print Co. Tous droits réservés.',
+      rights: '© 2025 Inka Print Co. Tous droits réservés.',
     },
   },
   en: {
@@ -388,16 +384,13 @@ export const translations: Record<Language, Translations> = {
       title: 'Contact us',
       subtitle: 'We are here to answer all your questions and support you in your printing projects',
       contactInfo: 'Contact information',
-      phone: 'Phone',
       email: 'Email',
-      whatsapp: 'WhatsApp',
       location: 'Location',
       locationDesc: 'Based in Montreal, delivery throughout Quebec. Quality and speed guaranteed.',
       followUs: 'Follow us',
       requestQuote: 'Request a quote',
       fullName: 'Full name *',
       emailLabel: 'Email *',
-      phoneLabel: 'Phone',
       productType: 'Product type',
       selectProduct: 'Select a product',
       message: 'Message *',
@@ -406,6 +399,7 @@ export const translations: Record<Language, Translations> = {
       messageSentDesc: 'We will respond to you as soon as possible.',
       uploadFile: 'Upload a file',
       fileUploaded: 'File uploaded',
+      other: 'Other',
     },
     about: {
       title: 'About us',
@@ -431,7 +425,7 @@ export const translations: Record<Language, Translations> = {
       products: 'Products',
       company: 'Company',
       contact: 'Contact',
-      rights: '© 2024 Inka Print Co. All rights reserved.',
+      rights: '© 2025 Inka Print Co. All rights reserved.',
     },
   },
 };

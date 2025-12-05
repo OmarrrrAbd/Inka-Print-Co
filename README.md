@@ -95,7 +95,7 @@ The site will automatically deploy on every push to your main branch.
 │       ├── AboutPage.tsx
 │       ├── ContactPage.tsx
 │       ├── ContactInfoPage.tsx
-│       └── ProductDetailPage.tsx
+│       └── ProductVariantPage.tsx
 ├── contexts/
 │   └── LanguageContext.tsx # Language switching context
 ├── lib/
