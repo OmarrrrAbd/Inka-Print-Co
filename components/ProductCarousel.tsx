@@ -13,10 +13,28 @@ export default function ProductCarousel({ setCurrentPage }: ProductCarouselProps
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [productsPerView, setProductsPerView] = useState(4);
 
-  const productsPerView = 4;
   const categories = getCategories();
   const totalCategories = categories.length;
+
+  // Déterminer le nombre d'éléments visibles selon la taille d'écran
+  useEffect(() => {
+    const updateProductsPerView = () => {
+      if (window.innerWidth < 640) {
+        setProductsPerView(1); // Mobile: 1 élément
+      } else if (window.innerWidth < 1024) {
+        setProductsPerView(2); // Tablette: 2 éléments
+      } else {
+        setProductsPerView(4); // Desktop: 4 éléments
+      }
+    };
+
+    updateProductsPerView();
+    window.addEventListener('resize', updateProductsPerView);
+    return () => window.removeEventListener('resize', updateProductsPerView);
+  }, []);
+
   const totalSlides = Math.ceil(totalCategories / productsPerView);
 
   // Dupliquer les catégories pour créer un effet infini (3 copies)
@@ -48,7 +66,7 @@ export default function ProductCarousel({ setCurrentPage }: ProductCarouselProps
 
   // Auto-play
   useEffect(() => {
-    if (isAutoPlaying) {
+    if (isAutoPlaying && totalSlides > 1) {
       intervalRef.current = setInterval(() => {
         nextSlide();
       }, 3000); // Change de slide toutes les 3 secondes
@@ -59,7 +77,7 @@ export default function ProductCarousel({ setCurrentPage }: ProductCarouselProps
         clearInterval(intervalRef.current);
       }
     };
-  }, [isAutoPlaying]);
+  }, [isAutoPlaying, totalSlides]);
 
   const handleCategoryClick = (categorySlug: string) => {
     setCurrentPage(`product-category-${categorySlug}`);
@@ -126,24 +144,28 @@ export default function ProductCarousel({ setCurrentPage }: ProductCarouselProps
   return (
     <div className="relative">
       {/* Boutons de navigation */}
-      <button
-        onClick={prevSlide}
-        onMouseEnter={() => setIsAutoPlaying(false)}
-        onMouseLeave={() => setIsAutoPlaying(true)}
-        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 bg-white rounded-full p-3 shadow-lg hover:bg-ink-primary hover:text-white transition-all opacity-80 hover:opacity-100 hidden sm:block border border-ink-primary-100"
-        aria-label="Précédent"
-      >
-        <i className="fas fa-chevron-left text-ink-primary text-xl"></i>
-      </button>
-      <button
-        onClick={nextSlide}
-        onMouseEnter={() => setIsAutoPlaying(false)}
-        onMouseLeave={() => setIsAutoPlaying(true)}
-        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 bg-white rounded-full p-3 shadow-lg hover:bg-ink-primary hover:text-white transition-all opacity-80 hover:opacity-100 hidden sm:block border border-ink-primary-100"
-        aria-label="Suivant"
-      >
-        <i className="fas fa-chevron-right text-ink-primary text-xl"></i>
-      </button>
+      {totalSlides > 1 && (
+        <>
+          <button
+            onClick={prevSlide}
+            onMouseEnter={() => setIsAutoPlaying(false)}
+            onMouseLeave={() => setIsAutoPlaying(true)}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 sm:-translate-x-4 z-10 bg-white rounded-full p-2 sm:p-3 shadow-lg hover:bg-ink-primary hover:text-white transition-all opacity-80 hover:opacity-100 border border-ink-primary-100"
+            aria-label="Précédent"
+          >
+            <i className="fas fa-chevron-left text-ink-primary text-lg sm:text-xl"></i>
+          </button>
+          <button
+            onClick={nextSlide}
+            onMouseEnter={() => setIsAutoPlaying(false)}
+            onMouseLeave={() => setIsAutoPlaying(true)}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 sm:translate-x-4 z-10 bg-white rounded-full p-2 sm:p-3 shadow-lg hover:bg-ink-primary hover:text-white transition-all opacity-80 hover:opacity-100 border border-ink-primary-100"
+            aria-label="Suivant"
+          >
+            <i className="fas fa-chevron-right text-ink-primary text-lg sm:text-xl"></i>
+          </button>
+        </>
+      )}
 
       {/* Container du carousel */}
       <div className="overflow-hidden">
@@ -160,15 +182,15 @@ export default function ProductCarousel({ setCurrentPage }: ProductCarouselProps
             return (
               <div
                 key={`${category.id}-${index}`}
-                className="flex-shrink-0 px-3"
+                className="flex-shrink-0 px-2 sm:px-3"
                 style={{ width: `${100 / productsPerView}%` }}
               >
                 <div
-                  className={`bg-gradient-to-br ${getCategoryColor(colorIndex)} rounded-xl p-6 hover:shadow-xl transition-all cursor-pointer border hover:scale-105 h-full flex flex-col group`}
+                  className={`bg-gradient-to-br ${getCategoryColor(colorIndex)} rounded-xl p-4 sm:p-6 hover:shadow-xl transition-all cursor-pointer border hover:scale-105 h-full flex flex-col group`}
                   onClick={() => handleCategoryClick(category.slug)}
                 >
                   {/* Image de la catégorie */}
-                  <div className="w-full h-48 bg-slate-neutral-100 rounded-lg mb-4 overflow-hidden flex items-center justify-center relative">
+                  <div className="w-full h-40 sm:h-48 bg-slate-neutral-100 rounded-lg mb-3 sm:mb-4 overflow-hidden flex items-center justify-center relative">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={categoryImage}
@@ -191,13 +213,13 @@ export default function ProductCarousel({ setCurrentPage }: ProductCarouselProps
                     />
                   </div>
                   
-                  <h3 className="text-xl font-semibold text-slate-neutral-dark mb-2">
+                  <h3 className="text-lg sm:text-xl font-semibold text-slate-neutral-dark mb-2">
                     {category.name}
                   </h3>
-                  <p className="text-slate-neutral mb-4 text-sm line-clamp-2 flex-grow">
+                  <p className="text-slate-neutral mb-3 sm:mb-4 text-xs sm:text-sm line-clamp-2 flex-grow">
                     {category.products.length} {category.products.length === 1 ? 'produit' : 'produits'} disponible{category.products.length > 1 ? 's' : ''}
                   </p>
-                  <button className={`${getCategoryTextColor(colorIndex)} font-semibold flex items-center group`}>
+                  <button className={`${getCategoryTextColor(colorIndex)} font-semibold text-xs sm:text-sm flex items-center group`}>
                     {t.products.seeProduct} <i className="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
                   </button>
                 </div>
@@ -208,24 +230,26 @@ export default function ProductCarousel({ setCurrentPage }: ProductCarouselProps
       </div>
 
       {/* Indicateurs de pagination */}
-      <div className="flex justify-center mt-8 gap-2">
-        {Array.from({ length: totalSlides }).map((_, index) => (
-          <button
-            key={index}
-            onClick={() => {
-              setCurrentIndex(index);
-              setIsAutoPlaying(false);
-              setTimeout(() => setIsAutoPlaying(true), 10000);
-            }}
-            className={`h-2 rounded-full transition-all ${
-              currentIndex === index
-                ? 'bg-ink-primary w-8 shadow-md shadow-ink-primary/30'
-                : 'bg-slate-neutral-100 hover:bg-slate-neutral w-2'
-            }`}
-            aria-label={`Aller à la slide ${index + 1}`}
-          />
-        ))}
-      </div>
+      {totalSlides > 1 && (
+        <div className="flex justify-center mt-6 sm:mt-8 gap-2">
+          {Array.from({ length: totalSlides }).map((_, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                setCurrentIndex(index);
+                setIsAutoPlaying(false);
+                setTimeout(() => setIsAutoPlaying(true), 10000);
+              }}
+              className={`h-2 rounded-full transition-all ${
+                currentIndex === index
+                  ? 'bg-ink-primary w-8 shadow-md shadow-ink-primary/30'
+                  : 'bg-slate-neutral-100 hover:bg-slate-neutral w-2'
+              }`}
+              aria-label={`Aller à la slide ${index + 1}`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
